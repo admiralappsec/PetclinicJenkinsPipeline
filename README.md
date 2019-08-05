@@ -8,4 +8,6 @@ This is a Jenkins pipeline that:
 
 Prerequisites:
 
-Version 2.6 of the Contrast Security Jenkins Plugin - see https://github.com/jenkinsci/contrast-continuous-application-security-plugin
+1. Jenkins - tested with version 2.180
+2. A Contrast Security account
+3. Version 2.6 of the Contrast Security Jenkins Plugin - see https://github.com/jenkinsci/contrast-continuous-application-security-plugin
