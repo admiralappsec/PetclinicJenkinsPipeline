@@ -27,7 +27,7 @@ pipeline {
 		    
 		stage('Run Application') {
             		steps{
-                sh 'java -javaagent:contrast.jar -Dcontrast.server=JenkinsPipelinePetclinicServer -Dcontrast.override.appversion=${JOB_NAME}-${BUILD_NUMBER} -Dcontrast.standalone.appname=PetclinicPipeline -jar target/*.jar &'
+                sh 'java -javaagent:contrast.jar -Dcontrast.server=JPetclinicPipelineSCMServer -Dcontrast.override.appversion=${JOB_NAME}-${BUILD_NUMBER} -Dcontrast.standalone.appname=PetclinicPipelineSCM -jar target/*.jar &'
                 sh 'sleep 55'
             		}
         	}
