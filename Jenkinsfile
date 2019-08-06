@@ -41,7 +41,7 @@ pipeline {
 		    
         	stage('Contrast Verification') {
 			steps{
-            		contrastVerification profile:'rstatsingerEval',applicationName:'PetclinicPipeline',count:0,severity:'High'
+            		contrastVerification profile:'rstatsingerEval',applicationName:'PetclinicPipelineSCM',count:0,severity:'High'
         		}
 		}
         }
