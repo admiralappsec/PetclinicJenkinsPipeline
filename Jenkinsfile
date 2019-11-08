@@ -41,7 +41,9 @@ pipeline {
 		    
         	stage('Contrast Verification') {
 			steps{
-            		contrastVerification profile:'rstatsingerEval2',applicationName:'PetclinicPipelineSCM',count:0,severity:'High'
+			// use application ID from Contrast UI 895f532d-2346-4c86-a4e5-f62e7634838f
+            		// contrastVerification profile:'rstatsingerEval2',applicationName:'PetclinicPipelineSCM',count:0,severity:'High'
+			contrastVerification applicationI: '895f532d-2346-4c86-a4e5-f62e7634838f', profile:'rstatsingerEval2',queryBy:2,count:0,severity:'High'
         		}
 		}
         }
