@@ -21,7 +21,7 @@ pipeline {
      
 		stage('Deploy Contrast Agent'){
 			steps{
-			contrastAgent agentType:'JAVA', profile:'rstatsingerEval',outputDirectory:"${pwd()}"
+			contrastAgent agentType:'JAVA', profile:'rstatsingerEval2',outputDirectory:"${pwd()}"
 			}
 		}
 		    
