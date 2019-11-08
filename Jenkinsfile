@@ -43,7 +43,7 @@ pipeline {
 			steps{
 			// use application ID from Contrast UI 895f532d-2346-4c86-a4e5-f62e7634838f
             		// contrastVerification profile:'rstatsingerEval2',applicationName:'PetclinicPipelineSCM',count:0,severity:'High'
-			contrastVerification applicationId: '895f532d-2346-4c86-a4e5-f62e7634838f', profile:'rstatsingerEval2',queryBy:4,appVersionTag: ${JOB_NAME}-${BUILD_NUMBER},count:0,severity:'High'
+			contrastVerification applicationId: '895f532d-2346-4c86-a4e5-f62e7634838f', profile:'rstatsingerEval2',queryBy:4,appVersionTag:'${JOB_NAME}-${BUILD_NUMBER}',count:0,severity:'High'
         		}
 		}
         }
