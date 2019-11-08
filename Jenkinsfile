@@ -35,7 +35,7 @@ pipeline {
 		stage('Hit an Endpoint') {
             		steps{
                 		sh 'wget http://localhost:8081/owners?lastName=Smith'
-                		sh 'sleep 10'
+                		sh 'sleep 20'
             		}
         	}
 		    
