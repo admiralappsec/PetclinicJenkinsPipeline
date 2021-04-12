@@ -27,6 +27,7 @@ pipeline {
 		stage('Download Contrast Agent'){
 			steps{
 				//this step downloads the latest Contrast Security Agent into your Jenkins workspace
+				//the petclinic application is a java application, so we explicitly pass 'JAVA' into our agent type
 				contrastAgent agentType:'JAVA', profile:'<YOUR_PROFILE_CONFIGURATION_IN_JENKINS>',outputDirectory:"${pwd()}"
 			}
 		}   
@@ -40,7 +41,9 @@ pipeline {
         	}
 		stage('Hit an Endpoint') {
             		steps{
+				//simulate hitting an endpoint within the application
                 		sh 'wget http://localhost:8081/owners?lastName=Smith'
+				//wait 20 seconds
                 		sh 'sleep 20'
             		}
         	}  
@@ -48,7 +51,8 @@ pipeline {
 			steps{
 				//use application ID from Contrast UI
             			//contrastVerification - this step verifies vulnerabilities with the Contrast Security Team Server
-				contrastVerification applicationId: '895f532d-2346-4c86-a4e5-f62e7634838f', profile:'rstatsingerEval2',queryBy:3,count:0,severity:'High'
+				//queryBy,count, and severity are all configuration parameters passed to the contrastVerfication step - usage can be found at https://docs.contrastsecurity.com/en/jenkins.html
+				contrastVerification applicationId: '<YOUR_CONTRAST_SECURITY_APPLICATION_ID_FROM_CS_TEAM_SERVER>', profile:'<YOUR_PROFILE_CONFIGURATION_IN_JENKINS>',queryBy:3,count:0,severity:'High'
         		}
 		}
         }
