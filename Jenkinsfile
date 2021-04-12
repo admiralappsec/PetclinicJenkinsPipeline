@@ -34,6 +34,7 @@ pipeline {
 		stage('Run Application') {
             		steps{
 				//this step deploys the petclinic application along with the Contrast Security Agent instrumentation
+				//agent instrumentation and usage can be found at https://docs.contrastsecurity.com/en/install-the-java-agent.html
                 		sh 'java -javaagent:contrast.jar -Dcontrast.server=PetclinicPipelineSCMServer -Dcontrast.override.appversion=${JOB_NAME}-${BUILD_NUMBER} -Dcontrast.application.session_metadata="buildNumber=${BUILD_NUMBER}" -Dcontrast.standalone.appname=PetclinicPipelineSCM -jar target/*.jar &'
                 		//wait 75 seconds
 				sh 'sleep 75'
