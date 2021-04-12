@@ -1,5 +1,6 @@
 pipeline {
 	 agent any
+	//this pipeline job assumes you have java jdk8 and maven3 configured
     	tools {
         	jdk 'jdk8'
         	maven 'maven3'
@@ -8,12 +9,15 @@ pipeline {
     	stages {
 		stage ('Clone the project') {
     	    		steps{
+			//this step clones an existing github project into your working directory
+			//this lab uses the spring-petclinic application	
             		git 'https://github.com/admiralappsec/spring-petclinic-FIXED.git'   
     	    		}
     	 	}
     	    
 		stage('Build') {
 			steps{
+				//skipping maven tests for demo purposes
 				sh 'mvn clean package -DskipTests'
 				sleep 10
 			}
