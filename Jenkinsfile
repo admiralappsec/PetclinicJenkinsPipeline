@@ -5,6 +5,8 @@ pipeline {
         	jdk 'jdk8'
         	maven 'maven3'
     	}
+	//pipeline stages include: 'Clone the project', 'Build', 'Deploy Contrast Agent', 'Run Application', 'Hit an EndPoint', 'Contrast Verification'
+	//You an also use the Contrast Maven plugin within the 'Build' step to take advantage of the Contrast Security Platform capability within your maven builds
     	stages {
 		stage ('Clone the project') {
     	    		steps{
@@ -17,6 +19,7 @@ pipeline {
 			steps{
 				//skipping maven tests for demo purposes
 				sh 'mvn clean package -DskipTests'
+				//wait 10 seconds
 				sleep 10
 			}
 		}
