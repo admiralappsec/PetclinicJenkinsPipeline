@@ -35,7 +35,7 @@ pipeline {
             		steps{
 				//this step deploys the petclinic application along with the Contrast Security Agent instrumentation
 				//agent instrumentation and usage can be found at https://docs.contrastsecurity.com/en/install-the-java-agent.html
-                		sh 'nohup java -javaagent:<CONTRAST.JAR_LOCATION> -Dcontrast.server=<YOUR_CONTRAST_TEAM_SERVER_URL> -Dcontrast.override.appversion=${JOB_NAME}-${BUILD_NUMBER} -Dcontrast.application.session_metadata="buildNumber=${BUILD_NUMBER}" -Dcontrast.standalone.appname=<CONTRAST_SECURITY_APPLICATION_NAME> =8081 -jar target/*.jar >> <JENKINS_LOG_LOCATION>&'
+                		sh 'nohup java -javaagent:<CONTRAST.JAR_LOCATION> -Dcontrast.server=<YOUR_CONTRAST_TEAM_SERVER_URL> -Dcontrast.override.appversion=${JOB_NAME}-${BUILD_NUMBER} -Dcontrast.application.session_metadata="buildNumber=${BUILD_NUMBER}" -Dcontrast.standalone.appname=<CONTRAST_SECURITY_APPLICATION_NAME> -Dserver.port=8081 -jar target/*.jar >> <JENKINS_LOG_LOCATION>&'
                 		//wait 75 seconds
 				sh 'sleep 75'
             		}
