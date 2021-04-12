@@ -5,7 +5,7 @@ pipeline {
         	jdk 'jdk8'
         	maven 'maven3'
     	}
-	//pipeline stages include: 'Clone the project', 'Build', 'Deploy Contrast Agent', 'Run Application', 'Hit an EndPoint', 'Contrast Verification'
+	//pipeline stages include: 'Clone the project', 'Build', 'Download Contrast Agent', 'Run Application', 'Hit an EndPoint', 'Contrast Verification'
 	//You an also use the Contrast Maven plugin within the 'Build' step to take advantage of the Contrast Security Platform capability within your maven builds
     	stages {
 		stage ('Clone the project') {
@@ -18,20 +18,24 @@ pipeline {
 		stage('Build') {
 			steps{
 				//skipping maven tests for demo purposes
+				//****You an also use the Contrast Maven plugin within the 'Build' step to take advantage of the Contrast Security Platform capability within your maven builds
 				sh 'mvn clean package -DskipTests'
 				//wait 10 seconds
 				sleep 10
 			}
 		}
-		stage('Deploy Contrast Agent'){
+		stage('Download Contrast Agent'){
 			steps{
-			contrastAgent agentType:'JAVA', profile:'<YOUR_PROFILE_CONFIGURATION_IN_JENKINS>',outputDirectory:"${pwd()}"
+				//this step downloads the latest Contrast Security Agent into your Jenkins workspace
+				contrastAgent agentType:'JAVA', profile:'<YOUR_PROFILE_CONFIGURATION_IN_JENKINS>',outputDirectory:"${pwd()}"
 			}
 		}   
 		stage('Run Application') {
             		steps{
-                sh 'java -javaagent:contrast.jar -Dcontrast.server=PetclinicPipelineSCMServer -Dcontrast.override.appversion=${JOB_NAME}-${BUILD_NUMBER} -Dcontrast.application.session_metadata="buildNumber=${BUILD_NUMBER}" -Dcontrast.standalone.appname=PetclinicPipelineSCM -jar target/*.jar &'
-                sh 'sleep 75'
+				//this step deploys the petclinic application along with the Contrast Security Agent instrumentation
+                		sh 'java -javaagent:contrast.jar -Dcontrast.server=PetclinicPipelineSCMServer -Dcontrast.override.appversion=${JOB_NAME}-${BUILD_NUMBER} -Dcontrast.application.session_metadata="buildNumber=${BUILD_NUMBER}" -Dcontrast.standalone.appname=PetclinicPipelineSCM -jar target/*.jar &'
+                		//wait 75 seconds
+				sh 'sleep 75'
             		}
         	}
 		stage('Hit an Endpoint') {
