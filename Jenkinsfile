@@ -8,7 +8,7 @@ pipeline {
     	stages {
 		stage ('Clone the project') {
     	    		steps{
-            		git 'https://github.com/rstatsinger/spring-petclinic.git'   
+            		git 'https://github.com/admiralappsec/spring-petclinic-FIXED.git'   
     	    		}
     	 	}
     	    
@@ -21,7 +21,7 @@ pipeline {
      
 		stage('Deploy Contrast Agent'){
 			steps{
-			contrastAgent agentType:'JAVA', profile:'rstatsingerEval2',outputDirectory:"${pwd()}"
+			contrastAgent agentType:'JAVA', profile:'<YOUR_PROFILE_CONFIGURATION_IN_JENKINS>',outputDirectory:"${pwd()}"
 			}
 		}
 		    
@@ -41,8 +41,8 @@ pipeline {
 		    
         	stage('Contrast Verification') {
 			steps{
-			// use application ID from Contrast UI 895f532d-2346-4c86-a4e5-f62e7634838f
-            		// contrastVerification profile:'rstatsingerEval2',applicationName:'PetclinicPipelineSCM',count:0,severity:'High'
+			// use application ID from Contrast UI
+            		// contrastVerification - this step verifies vulnerabilities with the Contrast Security Team Server
 			contrastVerification applicationId: '895f532d-2346-4c86-a4e5-f62e7634838f', profile:'rstatsingerEval2',queryBy:3,count:0,severity:'High'
         		}
 		}
